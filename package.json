@@ -1,0 +1,36 @@
+{
+  "name": "deepl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "tsc && node dist/index.js",
+    "dev": "ts-node-dev --respawn src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cheerio": "^0.22.16",
+    "@types/clear": "^0.1.0",
+    "@types/cli-progress": "^3.4.2",
+    "@types/inquirer": "^6.5.0",
+    "@types/node": "^13.7.6",
+    "@types/node-fetch": "^2.5.5",
+    "@types/puppeteer": "^2.0.1",
+    "ts-node": "^8.6.2",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.8.2"
+  },
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "cheerio": "^1.0.0-rc.3",
+    "clear": "^0.1.0",
+    "cli-progress": "^3.6.0",
+    "inquirer": "^7.0.4",
+    "node-fetch": "^2.6.0",
+    "puppeteer": "^2.1.1"
+  }
+}
