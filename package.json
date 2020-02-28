@@ -8,11 +8,12 @@
   },
   "preferGlobal": true,
   "files": [
-    "lib/*"
+    "lib/*",
+    "bin/*"
   ],
   "scripts": {
     "prepublishOnly": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\"",
     "build": "tsc",
     "start": "tsc && node lib/index.js",
     "dev": "ts-node-dev --respawn src/index.ts"

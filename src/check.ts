@@ -32,6 +32,10 @@ function isValidArray(data: any[]) {
 
 export default function checkInput(path: string) {
   const rawData = fs.readFileSync(path, "utf8");
+  if (!rawData) {
+    console.log(chalk.red.bold("JSON file should not be empty"));
+    return null;
+  }
   const data = JSON.parse(rawData) as string[];
 
   if (!arrayExists(data) || !isValidArray(data)) return null;
