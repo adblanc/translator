@@ -1,24 +1,38 @@
 {
-  "name": "deepl",
+  "name": "@ablanc/translator",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Node.js translator using puppeteer to scrape deepl.",
+  "main": "lib/index.js",
+  "bin": {
+    "translator": "./bin/translator"
+  },
+  "preferGlobal": true,
+  "files": [
+    "lib/*"
+  ],
   "scripts": {
+    "prepublishOnly": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "tsc && node dist/index.js",
     "dev": "ts-node-dev --respawn src/index.ts"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "deepl",
+    "scraper",
+    "scraping",
+    "translation",
+    "translator",
+    "typescript",
+    "node.js"
+  ],
+  "author": "Blanc Adrien",
   "license": "ISC",
   "devDependencies": {
-    "@types/cheerio": "^0.22.16",
     "@types/clear": "^0.1.0",
     "@types/cli-progress": "^3.4.2",
     "@types/inquirer": "^6.5.0",
     "@types/node": "^13.7.6",
-    "@types/node-fetch": "^2.5.5",
     "@types/puppeteer": "^2.0.1",
     "ts-node": "^8.6.2",
     "ts-node-dev": "^1.0.0-pre.44",
@@ -26,11 +40,9 @@
   },
   "dependencies": {
     "chalk": "^3.0.0",
-    "cheerio": "^1.0.0-rc.3",
     "clear": "^0.1.0",
     "cli-progress": "^3.6.0",
     "inquirer": "^7.0.4",
-    "node-fetch": "^2.6.0",
     "puppeteer": "^2.1.1"
   }
 }
