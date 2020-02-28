@@ -2,7 +2,6 @@ import langs from "./static/langs";
 import inquirer from "inquirer";
 import fs from "fs";
 import chalk from "chalk";
-import clear from "clear";
 
 const checkIfFileExists = (path: string) => {
   return fs.existsSync(path);
@@ -21,14 +20,17 @@ const askInputLang = () => {
     {
       name: "INPUT_LANG",
       type: "list",
-      choices: [
-        { name: "n'importe quelle langue", value: "auto" },
-        ...langs.map(l => l.name)
-      ],
+      choices: ["Any language (detect)", ...langs.map(l => l.alias)],
       message: "Please, select the input language",
       filter: (val: string) => {
-        const lang = langs.find(l => l.name === val);
-        return lang ? lang : { name: "n'importe quelle langue", value: "auto" };
+        const lang = langs.find(l => l.alias === val);
+        return lang
+          ? lang
+          : {
+              name: "n'importe quelle langue",
+              value: "auto",
+              alias: "Any language (detect)"
+            };
       }
     }
   ];
@@ -40,10 +42,10 @@ const askOutPutLang = () => {
     {
       name: "OUTPUT_LANG",
       type: "list",
-      choices: langs.map(l => l.name),
+      choices: langs.map(l => l.alias),
       message: "Please, select the output language",
       filter: (val: string) => {
-        const lang = langs.find(l => l.name === val);
+        const lang = langs.find(l => l.alias === val);
         return lang ? lang : langs.find(l => l.value === "EN");
       }
     }
@@ -75,7 +77,6 @@ const askAll = async (): Promise<any> => {
   const { OUTPUT_LANG } = await askOutPutLang();
 
   if (INPUT_LANG === OUTPUT_LANG) {
-    clear();
     console.log(
       chalk.red.bold("Input and output should be different, please try again.")
     );

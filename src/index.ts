@@ -1,5 +1,4 @@
 import chalk from "chalk";
-import clear from "clear";
 import fs from "fs";
 import cliProgress from "cli-progress";
 import Translation from "./translate";
@@ -44,7 +43,6 @@ const translateData = async (
 };
 
 async function start() {
-  clear();
   const { INPUT_LANG, OUTPUT_LANG, PATH } = await askAll();
 
   const data = checkInput(PATH);

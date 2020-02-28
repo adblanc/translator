@@ -14,7 +14,7 @@
     "prepublishOnly": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "tsc && node dist/index.js",
+    "start": "tsc && node lib/index.js",
     "dev": "ts-node-dev --respawn src/index.ts"
   },
   "keywords": [
@@ -29,7 +29,6 @@
   "author": "Blanc Adrien",
   "license": "ISC",
   "devDependencies": {
-    "@types/clear": "^0.1.0",
     "@types/cli-progress": "^3.4.2",
     "@types/inquirer": "^6.5.0",
     "@types/node": "^13.7.6",
@@ -40,7 +39,6 @@
   },
   "dependencies": {
     "chalk": "^3.0.0",
-    "clear": "^0.1.0",
     "cli-progress": "^3.6.0",
     "inquirer": "^7.0.4",
     "puppeteer": "^2.1.1"
