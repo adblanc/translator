@@ -1,5 +1,5 @@
 import puppeteer from "puppeteer";
-import langs, { Lang } from "./langs";
+import { Lang } from "./static/langs";
 const URL = "https://www.deepl.com/fr/translator";
 
 const LANGS_SELECTOR = {
@@ -135,6 +135,8 @@ export default class Translate {
   public async getTranslation(sentence: string) {
     const { page } = this;
     let value: any = undefined;
+
+    if (!sentence.trim()) return sentence;
 
     await this.checkLang();
     await this.clearInput(OUTPUT_SELECTOR);

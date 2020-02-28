@@ -1,9 +1,10 @@
-import Translation from "./translate";
-import askAll, { askProperties, askResultOption, askResultPath } from "./input";
 import chalk from "chalk";
 import clear from "clear";
 import fs from "fs";
 import cliProgress from "cli-progress";
+import Translation from "./translate";
+import askAll, { askProperties, askResultOption, askResultPath } from "./input";
+import checkInput, { checkProperties } from "./check";
 
 const createProgressBar = () => {
   const separator = chalk.red.bold("||");
@@ -45,39 +46,25 @@ const translateData = async (
 async function start() {
   clear();
   const { INPUT_LANG, OUTPUT_LANG, PATH } = await askAll();
-  const t = await new Translation(false, INPUT_LANG, OUTPUT_LANG);
 
-  const rawData = fs.readFileSync(PATH as string, "utf8");
-  const data = JSON.parse(rawData) as string[];
+  const data = checkInput(PATH);
+  if (!data) return;
+  console.log(chalk.blue.bold("Data has been successfully loaded."));
 
-  if (!data || !Array.isArray(data)) {
-    console.log(chalk.red.bold("Your file must contain a valid array."));
-    await t.end();
-    return;
+  let properties = undefined;
+  if (typeof data[0] === "object") {
+    properties = await askProperties();
+    if (!checkProperties(data, properties)) return;
   }
 
   let RESULT_PATH = "";
   const { RESULT_OPTION } = await askResultOption();
+
   if (RESULT_OPTION === "JSON file") RESULT_PATH = await askResultPath();
 
-  let result = undefined;
-  switch (typeof data[0]) {
-    case "string":
-      result = await translateData(t, data, undefined);
-      break;
-    case "object":
-      const { PROPERTIES } = await askProperties();
-      result = await translateData(t, data, PROPERTIES as string[]);
-      break;
-    default:
-      console.log(
-        chalk.red.bold("Your file must contain an array of objects or strings")
-      );
-      await t.end();
-      return;
-  }
+  const t = await new Translation(true, INPUT_LANG, OUTPUT_LANG);
 
-  console.log(chalk.blue.bold("Data has been successfully loaded."));
+  let result = await translateData(t, data, properties);
 
   if (RESULT_OPTION === "Console") console.log(result);
   else {

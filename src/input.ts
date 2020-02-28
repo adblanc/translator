@@ -1,4 +1,4 @@
-import langs from "./langs";
+import langs from "./static/langs";
 import inquirer from "inquirer";
 import fs from "fs";
 import chalk from "chalk";
@@ -91,7 +91,7 @@ const askAll = async (): Promise<any> => {
   };
 };
 
-export const askProperties = () => {
+export const askProperties = async () => {
   const questions = [
     {
       name: "PROPERTIES",
@@ -103,7 +103,8 @@ export const askProperties = () => {
       }
     }
   ];
-  return inquirer.prompt(questions);
+  const result = await inquirer.prompt(questions);
+  return result.PROPERTIES as string[];
 };
 
 export const askResultOption = () => {
