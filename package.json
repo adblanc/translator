@@ -1,6 +1,6 @@
 {
   "name": "@ablanc/translator",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Node.js translator using puppeteer to scrape deepl.",
   "main": "lib/index.js",
   "bin": {
