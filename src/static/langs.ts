@@ -6,15 +6,15 @@ export interface Lang {
 }
 
 const langs: Lang[] = [
-  { name: "Français", value: "FR", flag: "🇫🇷", alias: "French" },
-  { name: "Anglais", value: "EN", flag: "🇬🇧", alias: "English" },
-  { name: "Allemand", value: "DE", flag: "🇩🇪", alias: "German" },
-  { name: "Espagnol", value: "ES", flag: "🇪🇸", alias: "Spanish" },
-  { name: "Portugais", value: "PT", flag: "🇵🇹", alias: "Portuguese" },
-  { name: "Italien", value: "IT", flag: "🇮🇹", alias: "Italian" },
-  { name: "Néerlandais", value: "NL", flag: "🇳🇱", alias: "Dutch" },
-  { name: "Polonais", value: "PL", flag: "🇵🇱", alias: "Polish" },
-  { name: "Russe", value: "RU", flag: "🇷🇺", alias: "Russian" }
+  { name: "français", value: "FR", flag: "🇫🇷", alias: "French" },
+  { name: "anglais", value: "EN", flag: "🇬🇧", alias: "English" },
+  { name: "allemand", value: "DE", flag: "🇩🇪", alias: "German" },
+  { name: "espagnol", value: "ES", flag: "🇪🇸", alias: "Spanish" },
+  { name: "portugais", value: "PT", flag: "🇵🇹", alias: "Portuguese" },
+  { name: "italien", value: "IT", flag: "🇮🇹", alias: "Italian" },
+  { name: "néerlandais", value: "NL", flag: "🇳🇱", alias: "Dutch" },
+  { name: "polonais", value: "PL", flag: "🇵🇱", alias: "Polish" },
+  { name: "russe", value: "RU", flag: "🇷🇺", alias: "Russian" },
 ];
 
 export default langs;

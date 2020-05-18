@@ -4,21 +4,17 @@ const URL = "https://www.deepl.com/fr/translator";
 
 const LANGS_SELECTOR = {
   input: {
-    button:
-      "#dl_translator > div.lmt__sides_container > div.lmt__side_container.lmt__side_container--source > div.lmt__language_container > div > button",
-    lang:
-      "#dl_translator > div.lmt__sides_container > div.lmt__side_container.lmt__side_container--source > div.lmt__language_container > div > div > button[dl-value=${LANG}]",
+    button: ".lmt__language_select--source > button:nth-child(1)",
+    lang: ".lmt__language_select--source > div > button[dl-lang=${LANG}]",
     text:
-      "#dl_translator > div.lmt__sides_container > div.lmt__side_container.lmt__side_container--source > div.lmt__language_container > div > button > span > strong"
+      ".lmt__language_select--source > button:nth-child(1) > span:nth-child(1) > strong:nth-child(2)",
   },
   output: {
-    button:
-      "#dl_translator > div.lmt__sides_container > div.lmt__side_container.lmt__side_container--target > div.lmt__language_container > div > button",
-    lang:
-      "#dl_translator > div.lmt__sides_container > div.lmt__side_container.lmt__side_container--target > div.lmt__language_container > div > div > button[dl-value=${LANG}]",
+    button: ".lmt__language_select--target > button:nth-child(1)",
+    lang: ".lmt__language_select--target > div > button[dl-lang=${LANG}]",
     text:
-      "#dl_translator > div.lmt__sides_container > div.lmt__side_container.lmt__side_container--target > div.lmt__language_container > div > button > span > strong"
-  }
+      ".lmt__language_select--target > button:nth-child(1) > span:nth-child(1) > strong:nth-child(2)",
+  },
 };
 
 const INPUT_SELECTOR =
@@ -121,11 +117,11 @@ export default class Translate {
 
     const inputLang = await page.$eval(
       LANGS_SELECTOR.input.text,
-      el => el.textContent
+      (el) => el.textContent
     );
     const outputLang = await page.$eval(
       LANGS_SELECTOR.output.text,
-      el => el.textContent
+      (el) => el.textContent
     );
 
     if (inputLang !== this.input.name) await this.changeInputLang(this.page);

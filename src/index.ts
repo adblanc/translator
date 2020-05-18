@@ -13,7 +13,7 @@ const createProgressBar = () => {
     )} ${separator} [{bar}] ${separator} {percentage}% ${separator} {value}/${chalk.magenta.bold(
       "{total}"
     )} Chunks ${separator} ETA: {eta_formatted}`,
-    hideCursor: true
+    hideCursor: true,
   });
 };
 
