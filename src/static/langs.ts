@@ -1,20 +1,75 @@
 export interface Lang {
   name: string;
-  value: string;
+  inputValue: string;
+  outputValue: string;
   alias: string;
   flag?: string;
 }
 
 const langs: Lang[] = [
-  { name: "français", value: "FR", flag: "🇫🇷", alias: "French" },
-  { name: "anglais", value: "EN", flag: "🇬🇧", alias: "English" },
-  { name: "allemand", value: "DE", flag: "🇩🇪", alias: "German" },
-  { name: "espagnol", value: "ES", flag: "🇪🇸", alias: "Spanish" },
-  { name: "portugais", value: "PT", flag: "🇵🇹", alias: "Portuguese" },
-  { name: "italien", value: "IT", flag: "🇮🇹", alias: "Italian" },
-  { name: "néerlandais", value: "NL", flag: "🇳🇱", alias: "Dutch" },
-  { name: "polonais", value: "PL", flag: "🇵🇱", alias: "Polish" },
-  { name: "russe", value: "RU", flag: "🇷🇺", alias: "Russian" },
+  {
+    name: "français",
+    inputValue: "fr",
+    outputValue: "fr-FR",
+    flag: "🇫🇷",
+    alias: "French",
+  },
+  {
+    name: "anglais",
+    inputValue: "en",
+    outputValue: "en-US",
+    flag: "🇬🇧",
+    alias: "English",
+  },
+  {
+    name: "allemand",
+    inputValue: "de",
+    outputValue: "de-DE",
+    flag: "🇩🇪",
+    alias: "German",
+  },
+  {
+    name: "espagnol",
+    inputValue: "es",
+    outputValue: "es-ES",
+    flag: "🇪🇸",
+    alias: "Spanish",
+  },
+  {
+    name: "portugais",
+    inputValue: "pt",
+    outputValue: "pt-PT",
+    flag: "🇵🇹",
+    alias: "Portuguese",
+  },
+  {
+    name: "italien",
+    inputValue: "it",
+    outputValue: "it-IT",
+    flag: "🇮🇹",
+    alias: "Italian",
+  },
+  {
+    name: "néerlandais",
+    inputValue: "nl",
+    outputValue: "nl-NL",
+    flag: "🇳🇱",
+    alias: "Dutch",
+  },
+  {
+    name: "polonais",
+    inputValue: "pl",
+    outputValue: "pl-PL",
+    flag: "🇵🇱",
+    alias: "Polish",
+  },
+  {
+    name: "russe",
+    inputValue: "ru",
+    outputValue: "ru-RU",
+    flag: "🇷🇺",
+    alias: "Russian",
+  },
 ];
 
 export default langs;

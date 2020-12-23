@@ -5,23 +5,23 @@ const URL = "https://www.deepl.com/fr/translator";
 const LANGS_SELECTOR = {
   input: {
     button: ".lmt__language_select--source > button:nth-child(1)",
-    lang: ".lmt__language_select--source > div > button[dl-lang=${LANG}]",
+    lang:
+      ".lmt__language_select--source > div > button[dl-test=translator-lang-option-${LANG}]",
     text:
       ".lmt__language_select--source > button:nth-child(1) > span:nth-child(1) > strong:nth-child(2)",
   },
   output: {
     button: ".lmt__language_select--target > button:nth-child(1)",
-    lang: ".lmt__language_select--target > div > button[dl-lang=${LANG}]",
+    lang:
+      ".lmt__language_select--target > div > button[dl-test=translator-lang-option-${LANG}]",
     text:
       ".lmt__language_select--target > button:nth-child(1) > span:nth-child(1) > strong:nth-child(2)",
   },
 };
 
-const INPUT_SELECTOR =
-  "#dl_translator > div.lmt__sides_container > div.lmt__side_container.lmt__side_container--source > div.lmt__textarea_container > div > textarea";
+const INPUT_SELECTOR = "textarea[dl-test=translator-source-input]";
 
-const OUTPUT_SELECTOR =
-  "#dl_translator > div.lmt__sides_container > div.lmt__side_container.lmt__side_container--target > div.lmt__textarea_container > div.lmt__inner_textarea_container > textarea";
+const OUTPUT_SELECTOR = "textarea[dl-test=translator-target-input]";
 
 export default class Translate {
   //@ts-ignore
@@ -60,9 +60,13 @@ export default class Translate {
   }
 
   private async changeInputLang(page: puppeteer.Page) {
+    console.log(
+      "input",
+      LANGS_SELECTOR.input.lang.replace("${LANG}", this.input.inputValue)
+    );
     const LANG_INPUT_SELECTOR = LANGS_SELECTOR.input.lang.replace(
       "${LANG}",
-      this.input.value
+      this.input.inputValue
     );
 
     await page.click(LANGS_SELECTOR.input.button);
@@ -73,7 +77,7 @@ export default class Translate {
   private async changeOutputLang(page: puppeteer.Page) {
     const LANG_OUTPUT_SELECTOR = LANGS_SELECTOR.output.lang.replace(
       "${LANG}",
-      this.output.value
+      this.output.outputValue
     );
 
     await page.click(LANGS_SELECTOR.output.button);
@@ -94,9 +98,9 @@ export default class Translate {
   private async isTranslating() {
     const { page } = this;
 
-    const el = (await page.$("#dl_translator")) as puppeteer.ElementHandle<
-      Element
-    >;
+    const el = (await page.$(
+      "#dl_translator"
+    )) as puppeteer.ElementHandle<Element>;
     const classEl = await el.getProperty("className");
 
     const className = (await classEl.jsonValue()) as string;
