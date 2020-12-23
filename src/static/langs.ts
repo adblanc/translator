@@ -8,18 +8,18 @@ export interface Lang {
 
 const langs: Lang[] = [
   {
-    name: "français",
-    inputValue: "fr",
-    outputValue: "fr-FR",
-    flag: "🇫🇷",
-    alias: "French",
-  },
-  {
     name: "anglais",
     inputValue: "en",
     outputValue: "en-US",
     flag: "🇬🇧",
     alias: "English",
+  },
+  {
+    name: "français",
+    inputValue: "fr",
+    outputValue: "fr-FR",
+    flag: "🇫🇷",
+    alias: "French",
   },
   {
     name: "allemand",

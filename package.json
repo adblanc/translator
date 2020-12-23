@@ -14,8 +14,8 @@
   "scripts": {
     "prepublishOnly": "tsc",
     "test": "echo \"Error: no test specified\"",
-    "build": "tsc",
-    "start": "tsc && node lib/index.js",
+    "build": "rimraf lib && tsc",
+    "start": "yarn build && node lib/index.js",
     "dev": "ts-node-dev --respawn src/index.ts"
   },
   "keywords": [
@@ -34,6 +34,7 @@
     "@types/inquirer": "^6.5.0",
     "@types/node": "^13.7.6",
     "@types/puppeteer": "^2.0.1",
+    "rimraf": "^3.0.2",
     "ts-node": "^8.6.2",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.2"

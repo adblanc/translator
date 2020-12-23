@@ -1,4 +1,4 @@
-import langs from "./static/langs";
+import langs, { Lang } from "./static/langs";
 import inquirer from "inquirer";
 import fs from "fs";
 import chalk from "chalk";
@@ -20,19 +20,20 @@ const askInputLang = () => {
     {
       name: "INPUT_LANG",
       type: "list",
-      choices: ["Any language (detect)", ...langs.map(l => l.alias)],
+      choices: ["Any language (detect)", ...langs.map((l) => l.alias)],
       message: "Please, select the input language",
-      filter: (val: string) => {
-        const lang = langs.find(l => l.alias === val);
+      filter: (val: string): Lang => {
+        const lang = langs.find((l) => l.alias === val);
         return lang
           ? lang
           : {
               name: "n'importe quelle langue",
-              value: "auto",
-              alias: "Any language (detect)"
+              inputValue: "auto",
+              outputValue: "auto",
+              alias: "Any language (detect)",
             };
-      }
-    }
+      },
+    },
   ];
   return inquirer.prompt(questions);
 };
@@ -42,13 +43,13 @@ const askOutPutLang = () => {
     {
       name: "OUTPUT_LANG",
       type: "list",
-      choices: langs.map(l => l.alias),
+      choices: langs.map((l) => l.alias),
       message: "Please, select the output language",
-      filter: (val: string) => {
-        const lang = langs.find(l => l.alias === val);
-        return lang ? lang : langs.find(l => l.value === "EN");
-      }
-    }
+      filter: (val: string): Lang => {
+        const lang = langs.find((l) => l.alias === val);
+        return lang ?? langs[0];
+      },
+    },
   ];
   return inquirer.prompt(questions);
 };
@@ -65,8 +66,8 @@ const askPath = () => {
         if (!checkIfJSON(path)) return "Please enter a .json file";
         return true;
       },
-      default: "./default.json"
-    }
+      default: "./default.json",
+    },
   ];
   return inquirer.prompt(questions);
 };
@@ -88,7 +89,7 @@ const askAll = async (): Promise<any> => {
   return {
     INPUT_LANG,
     OUTPUT_LANG,
-    PATH
+    PATH,
   };
 };
 
@@ -100,9 +101,9 @@ export const askProperties = async () => {
       message:
         "Please, type in the properties name of your object's array fields you want to translate separated by a comma ,",
       filter: (val: string) => {
-        return val.split(",").map(c => c.trim());
-      }
-    }
+        return val.split(",").map((c) => c.trim());
+      },
+    },
   ];
   const result = await inquirer.prompt(questions);
   return result.PROPERTIES as string[];
@@ -115,8 +116,8 @@ export const askResultOption = () => {
       type: "list",
       choices: ["Console", "JSON file"],
       message: "Where the result should be printed out ?",
-      default: "JSON file"
-    }
+      default: "JSON file",
+    },
   ];
   return inquirer.prompt(questions);
 };
@@ -127,8 +128,8 @@ export const askResultPath = async () => {
       name: "RESULT_PATH",
       type: "input",
       message: "Please, type in the path you want for your result file",
-      default: "./result.json"
-    }
+      default: "./result.json",
+    },
   ];
   const result = await inquirer.prompt(questions);
   return result.RESULT_PATH as Promise<string>;

@@ -42,7 +42,7 @@ export default class Translate {
   }
 
   private initBrowser(headless: boolean) {
-    return puppeteer.launch({ headless });
+    return puppeteer.launch({ headless: false });
   }
 
   public end() {
@@ -53,6 +53,13 @@ export default class Translate {
     const page = await this.browser.newPage();
     await page.goto(URL);
 
+    await page.waitFor(1000);
+    try {
+      await page.click(".dl_cookieBanner--buttonAll");
+    } catch (ex) {
+      console.error("cookie click failed");
+    }
+
     await this.changeInputLang(page);
     await this.changeOutputLang(page);
 
@@ -60,16 +67,13 @@ export default class Translate {
   }
 
   private async changeInputLang(page: puppeteer.Page) {
-    console.log(
-      "input",
-      LANGS_SELECTOR.input.lang.replace("${LANG}", this.input.inputValue)
-    );
     const LANG_INPUT_SELECTOR = LANGS_SELECTOR.input.lang.replace(
       "${LANG}",
       this.input.inputValue
     );
 
     await page.click(LANGS_SELECTOR.input.button);
+    await page.waitFor(1000);
     await page.waitForSelector(LANG_INPUT_SELECTOR, { visible: true });
     await page.click(LANG_INPUT_SELECTOR);
   }
