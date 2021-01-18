@@ -12,21 +12,19 @@
   </p>
 </p>
 
-
-
 <!-- TABLE OF CONTENTS -->
+
 ## Table of Contents
 
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [Installation](#installation)
-* [Usage](#usage)
-* [Contributing](#contributing)
-* [License](#license)
-
-
+- [About the Project](#about-the-project)
+  - [Built With](#built-with)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]]
@@ -41,23 +39,37 @@ You can either get the result of the translation printed out in the console or a
 
 ### Built With
 
-* [Puppeteer](https://github.com/puppeteer/puppeteer)
-* [Inquirer](https://github.com/SBoudrias/Inquirer.js)
-* [Chalk](https://github.com/chalk/chalk)
-* [Cli-progress](https://github.com/AndiDittrich/Node.CLI-Progress)
+- [Puppeteer](https://github.com/puppeteer/puppeteer)
+- [Inquirer](https://github.com/SBoudrias/Inquirer.js)
+- [Chalk](https://github.com/chalk/chalk)
+- [Cli-progress](https://github.com/AndiDittrich/Node.CLI-Progress)
 
 ## Installation
 
 You can download it globally using
- ```sh
+
+```sh
 npm install -g @ablanc/translator
+```
+
+or add it as a devlopment dependency
+
+```sh
+npm install --save-dev @ablanc/translator
+
+# or with yarn
+yarn add -D @ablanc/translator
 ```
 
 ## Usage
 
 To use it type this in your terminal:
- ```sh
+
+```sh
 translator
+
+# or if u installed it as a dev dep
+npx translator
 ```
 
 ## Contributing
@@ -71,6 +83,7 @@ Any contributions you make are **greatly appreciated**.
 5. Open a Pull Request
 
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.

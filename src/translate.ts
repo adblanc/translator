@@ -42,7 +42,7 @@ export default class Translate {
   }
 
   private initBrowser(headless: boolean) {
-    return puppeteer.launch({ headless: false });
+    return puppeteer.launch({ headless });
   }
 
   public end() {

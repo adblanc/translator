@@ -15,7 +15,7 @@
     "prepublishOnly": "tsc",
     "test": "echo \"Error: no test specified\"",
     "build": "rimraf lib && tsc",
-    "start": "yarn build && node lib/index.js",
+    "start": "node lib/index.js",
     "dev": "ts-node-dev --respawn src/index.ts"
   },
   "keywords": [
