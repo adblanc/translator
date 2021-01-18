@@ -114,7 +114,7 @@ export const askResultOption = () => {
     {
       name: "RESULT_OPTION",
       type: "list",
-      choices: ["Console", "JSON file"],
+      choices: ["console", "JSON file"],
       message: "Where the result should be printed out ?",
       default: "JSON file",
     },

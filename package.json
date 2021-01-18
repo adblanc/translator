@@ -42,6 +42,7 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "cli-progress": "^3.6.0",
+    "commander": "^7.0.0",
     "inquirer": "^7.0.4",
     "puppeteer": "^2.1.1"
   }
