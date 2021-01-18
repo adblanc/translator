@@ -4,8 +4,35 @@ import cliProgress from "cli-progress";
 import Translation from "./translate";
 import askAll, { askProperties, askResultOption, askResultPath } from "./input";
 import checkInput, { checkProperties } from "./check";
-import commander, { Command, option } from "commander";
+import { Command } from "commander";
 import langs from "./static/langs";
+
+const program = new Command();
+
+program
+  .option("-i, --input <input>", "json file to process")
+  .option("-o, --output <console|path-to-file>", "output display")
+  .option(
+    "-li, --lang-input <lang_input>",
+    langs.map((l) => l.inputValue).join(" | ")
+  )
+  .option(
+    "-lo, --lang-output <lang_output>",
+    langs.map((l) => l.outputValue).join(" | ")
+  )
+  .option(
+    "-pt, --properties-to-translate <property,property>",
+    "specify your object properties you want to translate, separated by ,"
+  )
+  .option(
+    "-skid --skip-until-id <id>",
+    "it will start translating your objects from id"
+  )
+  .option("-int, --interactive", "interactive mode");
+
+program.parse(process.argv);
+
+const options = program.opts();
 
 const createProgressBar = () => {
   const separator = chalk.red.bold("||");
@@ -26,6 +53,7 @@ const translateData = async (
 ) => {
   const result = [];
   const bar = createProgressBar();
+  let idFound = false;
 
   bar.start(data.length, 0);
 
@@ -33,6 +61,20 @@ const translateData = async (
     if (!properties) result[i] = await t.getTranslation(data[i]);
     else {
       result[i] = { ...data[i] };
+      if (
+        options.skipUntilId !== undefined &&
+        !idFound &&
+        result[i].id != options.skipUntilId
+      ) {
+        bar.increment();
+        continue;
+      } else if (
+        options.skipUntilId !== undefined &&
+        result[i].id == options.skipUntilId &&
+        !idFound
+      ) {
+        idFound = true;
+      }
       for (let property of properties)
         result[i][property] = await t.getTranslation(data[i][property]);
     }
@@ -44,30 +86,7 @@ const translateData = async (
   return result;
 };
 
-const program = new Command();
-
-program
-  .option("-i, --input <input>", "json file to process")
-  .option("-o, --output <console|path-to-file>", "output display")
-  .option(
-    "-li, --lang-input <lang_input>",
-    langs.map((l) => l.inputValue).join(" | ")
-  )
-  .option(
-    "-lo, --lang-output <lang_output>",
-    langs.map((l) => l.outputValue).join(" | ")
-  )
-  .option(
-    "-pt, --properties-to-translate <property,property>",
-    "specify your object properties you want to translate, separated by ,"
-  )
-  .option("-int, --interactive", "interactive mode");
-
-program.parse(process.argv);
-
 async function start() {
-  const options = program.opts();
-
   if (options.interactive) {
     const { INPUT_LANG, OUTPUT_LANG, PATH } = await askAll();
 

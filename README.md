@@ -66,10 +66,17 @@ yarn add -D @ablanc/translator
 To use it type this in your terminal:
 
 ```sh
-translator
+Usage: translator [options]
 
-# or if u installed it as a dev dep
-npx translator
+Options:
+  -i, --input <input>                                 json file to process
+  -o, --output <console|path-to-file>                 output display
+  -li, --lang-input <lang_input>                      en | fr | de | es | pt | it | nl | pl | ru
+  -lo, --lang-output <lang_output>                    en-US | fr-FR | de-DE | es-ES | pt-PT | it-IT | nl-NL | pl-PL | ru-RU
+  -pt, --properties-to-translate <property,property>  specify your object properties you want to translate, separated by ,
+  -skid --skip-until-id <id>                          it will start translating your objects from id
+  -int, --interactive                                 interactive mode
+  -h, --help                                          display help for command
 ```
 
 ## Contributing
